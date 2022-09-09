@@ -17,8 +17,6 @@ export default function Home() {
       <main className={styles.main}>
         <Landing />
       </main>
-
-      <footer className={styles.footer}></footer>
     </div>
   );
 }
