@@ -12,6 +12,10 @@ export default function Home() {
           content="Frensbook - Networking made simpler using one click."
         />
         <link rel="icon" href="/handshakefavicon.webp" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@200;400;600;800&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
 
       <main className={styles.main}>

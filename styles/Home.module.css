@@ -34,7 +34,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(168.7deg, #02104b 0%, #01092b 98.85%);
+  /* background: linear-gradient(168.7deg, #02104b 0%, #01092b 98.85%); */
 }
 
 .header .line {

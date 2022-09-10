@@ -7,7 +7,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "../../styles/Home.module.css";
 import landingstyles from "../../styles/Landing.module.css";
-import FilledButton from "../Button/FilledButton";
+import buttonstyles from "../../styles/Button.module.css";
 
 const Landing = () => {
   return (
@@ -29,7 +29,7 @@ const Landing = () => {
           <p>
             A one page to showcase all your social links and your NFT swags{" "}
           </p>
-          <FilledButton>Connect Wallet</FilledButton>
+          <button className={buttonstyles.filledbutton}>Connect Wallet</button>
           <div className={landingstyles.imgcontainer}>
             <Image
               src="/mobile.png"
