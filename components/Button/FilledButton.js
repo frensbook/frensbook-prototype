@@ -3,9 +3,9 @@ import React from "react";
 
 const FilledButton = ({ children }) => {
   return (
-    <div>
+    <>
       <button className={buttonstyles.filledbutton}>{children}</button>
-    </div>
+    </>
   );
 };
 
