@@ -1,8 +1,3 @@
-.onboarding {
-  position: absolute;
-  z-index: -1;
-}
-
 .inputfield {
   position: relative;
   opacity: 0.3;

@@ -24,7 +24,7 @@ const Onboarding = () => {
           height="400"
         />
       </div>
-      <div className={styles.header}>
+      <div>
         <FormCard currentStep={formStep} prevFormStep={prevFormStep}>
           {formStep >= 0 && (
             <Gm formStep={formStep} nextFormStep={nextFormStep} />
