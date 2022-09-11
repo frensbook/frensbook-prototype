@@ -8,15 +8,21 @@ import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import buttonstyles from "../styles/Button.module.css";
+import axios from "axios";
 
 function Profile() {
   const [value, setValue] = React.useState("1");
+  const [nfts, setNfts] = React.useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const [scan, setScan] = React.useState(false);
+
+  React.useEffect(() => {
+    getNFTs();
+  }, []);
 
   return (
     <div className={styles.profile}>
@@ -70,6 +76,15 @@ function Profile() {
                 </p>
 
                 <div className={profilestyles.input}>
+                  <Image src="/wp.png" alt="whatsapp" width="20" height="20" />
+                  &nbsp; &nbsp;
+                  <a href="https://api.whatsapp.com/send/?phone=%2B917979881218&text=Hey%27priyanshu+we+just+met+in+solana+hacker+house+dilli&type=phone_number&app_absent=0">
+                    WhatsApp
+                  </a>
+                  {/* <input type="url" name="twitter" placeholder={`Twitter`} /> */}
+                </div>
+
+                <div className={profilestyles.input}>
                   <Image
                     src="/twitter.png"
                     alt="twitter"
@@ -77,7 +92,8 @@ function Profile() {
                     height="20"
                   />
                   &nbsp; &nbsp;
-                  <input type="url" name="twitter" placeholder={`Twitter`} />
+                  <a href="https://twitter.com/priynshuratnakr">Twitter</a>
+                  {/* <input type="url" name="twitter" placeholder={`Twitter`} /> */}
                 </div>
 
                 <div className={profilestyles.input}>
@@ -88,11 +104,14 @@ function Profile() {
                     height="20"
                   />
                   &nbsp; &nbsp;
-                  <input
+                  <a href="https://www.instagram.com/priyanshu_ratnakar/">
+                    Instagram
+                  </a>
+                  {/* <input
                     type="url"
                     name="instagram"
                     placeholder={`Instagram`}
-                  />
+                  /> */}
                 </div>
 
                 <div className={profilestyles.input}>
@@ -103,7 +122,10 @@ function Profile() {
                     height="20"
                   />{" "}
                   &nbsp; &nbsp;
-                  <input type="url" name="linkedin" placeholder={`LinkedIn`} />
+                  <a href="https://www.linkedin.com/in/priyanshuratnakar/">
+                    LinkedIn
+                  </a>
+                  {/* <input type="url" name="linkedin" placeholder={`LinkedIn`} /> */}
                 </div>
 
                 <div className={profilestyles.input}>
@@ -114,7 +136,8 @@ function Profile() {
                     height="20"
                   />
                   &nbsp; &nbsp;
-                  <input type="url" name="github" placeholder={`Github`} />
+                  <a href="https://github.com/priyanshuratnakar">Github</a>
+                  {/* <input type="url" name="github" placeholder={`Github`} /> */}
                 </div>
 
                 <br />
@@ -139,14 +162,23 @@ function Profile() {
               </div>
             </TabPanel>
             <TabPanel value="2">
-              <div className={profilestyles.gallery}>
-                <div className={profilestyles.box}></div>
-                <div className={profilestyles.box}></div>
-                <div className={profilestyles.box}></div>
-                <div className={profilestyles.box}></div>
-                <div className={profilestyles.box}></div>
-                <div className={profilestyles.box}></div>
-              </div>
+              {nfts ? (
+                <div className={profilestyles.gallery}>
+                  {nfts.map((nft) => {
+                    return (
+                      <>
+                        <img
+                          className={profilestyles.box}
+                          src={nft.imageUrl}
+                          alt=""
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+              ) : (
+                ""
+              )}
             </TabPanel>
             <TabPanel value="3">
               <Image
@@ -169,6 +201,38 @@ function Profile() {
       </div>
     </div>
   );
+
+  async function getNFTs() {
+    const config = {
+      url: "https://clean-restless-sky.solana-mainnet.discover.quiknode.pro/c600fa7023f705b698645c0c2eed2264da8240ab/",
+      method: "post",
+      "Content-Type": "application/json",
+      data: JSON.stringify({
+        id: 67,
+        jsonrpc: "2.0",
+        method: "qn_fetchNFTs",
+        params: {
+          wallet: "HV4ViEAX2wYaoAdB77ETsoTB2gcVjWEu1hgY25XCdVW7",
+          omitFields: ["provenance", "traits"],
+          page: 1,
+          perPage: 10,
+          contracts: [
+            "0x2106c00ac7da0a3430ae667879139e832307aeaa",
+            "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+          ],
+        },
+      }),
+    };
+
+    await axios(config)
+      .then((response) => {
+        // console.log(response.data.result);
+        setNfts(response.data.result.assets);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
 }
 
 export default Profile;
